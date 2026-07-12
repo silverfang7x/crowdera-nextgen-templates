@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Instrument_Serif, Public_Sans } from 'next/font/google';
 import { ThemeProvider } from './providers';
+import { ThemeCustomizer } from '@/components/ui/ThemeCustomizer';
 import './globals.css';
 
 const instrumentSerif = Instrument_Serif({
@@ -19,6 +20,17 @@ const publicSans = Public_Sans({
 export const metadata: Metadata = {
   title: 'Clearwater Relief Trust — Emergency Rapid Relief & Clean Water',
   description: 'A rapid-response disaster relief organization deploying water purification, medical aid, and survival support directly to families in crisis zones.',
+  icons: {
+    icon: '/favicon.ico',
+  },
+  openGraph: {
+    title: 'Clearwater Relief Trust — Emergency Rapid Relief & Clean Water',
+    description: 'A rapid-response disaster relief organization deploying water purification, medical aid, and survival support directly to families in crisis zones.',
+    url: 'https://clearwaterrelief.org',
+    siteName: 'Clearwater Relief Trust',
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
@@ -35,6 +47,7 @@ export default function RootLayout({
       <body className="min-h-full bg-surface text-ink font-sans transition-colors duration-200">
         <ThemeProvider>
           {children}
+          <ThemeCustomizer />
         </ThemeProvider>
       </body>
     </html>

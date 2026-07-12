@@ -5,6 +5,45 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
+
+function GalleryImage({
+  src,
+  alt,
+  fill,
+  sizes,
+  className,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  fill?: boolean;
+  sizes?: string;
+  className?: string;
+  priority?: boolean;
+}) {
+  const [loaded, setLoaded] = React.useState(false);
+  return (
+    <div className="relative w-full h-full bg-border/20 rounded-lg">
+      {!loaded && (
+        <div className="absolute inset-0 bg-border/40 animate-pulse rounded-lg" />
+      )}
+      <Image
+        src={src}
+        alt={alt}
+        fill={fill}
+        sizes={sizes}
+        priority={priority}
+        onLoad={() => setLoaded(true)}
+        className={cn(
+          className,
+          "transition-opacity duration-300",
+          loaded ? "opacity-100" : "opacity-0"
+        )}
+      />
+    </div>
+  );
+}
 
 export interface GalleryItem {
   id: string;
@@ -147,7 +186,7 @@ export function GallerySection({
                 aria-label={`Open lightbox viewer for ${item.title}`}
               >
                 <div className={`relative w-full ${item.aspectRatioClass || 'aspect-video'} overflow-hidden`}>
-                  <Image
+                  <GalleryImage
                     src={item.thumbnailUrl}
                     alt={item.title}
                     fill
@@ -251,7 +290,7 @@ export function GallerySection({
                         />
                       ) : (
                         <div className="relative w-full h-full max-h-[70vh] aspect-[16/10]">
-                          <Image
+                          <GalleryImage
                             src={items[activeIndex].url}
                             alt={items[activeIndex].title}
                             fill

@@ -168,3 +168,9 @@
   --color-accent-contrast: 220 20% 10%;   /* Dark graphite text */
   --color-border: 220 12% 22%;           /* Stark dark border */
 }
+
+/* Smooth HSL variables transitions on theme changes */
+.theme-transitioning,
+.theme-transitioning * {
+  transition: background-color 400ms ease, color 400ms ease, border-color 400ms ease, fill 400ms ease, stroke 400ms ease !important;
+}
