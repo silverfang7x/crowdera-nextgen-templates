@@ -169,6 +169,90 @@
   --color-border: 220 12% 22%;           /* Stark dark border */
 }
 
+/* ==========================================================================
+   6. EDUCATION THEME (Scholarly Indigo / Clean Lavender)
+   Best suited for universities, youth literacy, academies, and learning trusts.
+   ========================================================================== */
+
+/* Education - Light Mode */
+[data-theme="education"] {
+  --color-surface: 260 20% 98%;           /* Soft lavender white background */
+  --color-surface-elevated: 260 15% 94%;  /* Slightly darker lavender shade */
+  --color-ink: 262 30% 12%;               /* Deep indigo black */
+  --color-ink-muted: 262 15% 42%;         /* Slate lavender gray text */
+  --color-accent: 262 70% 45%;            /* Regal scholarly violet */
+  --color-accent-contrast: 0 0% 100%;    /* Stark white text */
+  --color-border: 262 15% 90%;           /* Soft lavender border */
+}
+
+/* Education - Dark Mode */
+.dark [data-theme="education"],
+[data-theme="education"].dark {
+  --color-surface: 262 15% 10%;          /* Dark royal indigo background */
+  --color-surface-elevated: 262 12% 16%; /* Lighter indigo gray block */
+  --color-ink: 260 20% 95%;              /* Bright cream text */
+  --color-ink-muted: 262 10% 70%;        /* Muted lavender gray text */
+  --color-accent: 262 80% 65%;           /* Luminous violet */
+  --color-accent-contrast: 262 30% 10%;   /* Dark indigo text */
+  --color-border: 262 12% 20%;           /* Deep indigo border */
+}
+
+/* ==========================================================================
+   7. FAITH-BASED THEME (Deep Burgundy / Warm Champagne)
+   Best suited for fellowships, retreats, theological institutes, and interfaith work.
+   ========================================================================== */
+
+/* Faith-Based - Light Mode */
+[data-theme="faith-based"] {
+  --color-surface: 36 30% 98%;           /* Warm champagne off-white */
+  --color-surface-elevated: 36 20% 93%;  /* Deep champagne tint */
+  --color-ink: 340 25% 12%;              /* Rich burgundy black */
+  --color-ink-muted: 340 12% 40%;        /* Earthy plum gray text */
+  --color-accent: 340 70% 36%;           /* Deep plum burgundy */
+  --color-accent-contrast: 0 0% 100%;    /* Stark white text */
+  --color-border: 36 15% 88%;            /* Soft warm gold border */
+}
+
+/* Faith-Based - Dark Mode */
+.dark [data-theme="faith-based"],
+[data-theme="faith-based"].dark {
+  --color-surface: 340 15% 10%;          /* Midnight burgundy dark background */
+  --color-surface-elevated: 340 12% 16%; /* Lighter burgundy charcoal block */
+  --color-ink: 36 30% 94%;               /* Warm champagne text */
+  --color-ink-muted: 340 10% 70%;        /* Muted plum text */
+  --color-accent: 340 80% 60%;           /* Warm rose gold */
+  --color-accent-contrast: 340 30% 10%;   /* Deep burgundy text */
+  --color-border: 340 12% 20%;           /* Dark burgundy border */
+}
+
+/* ==========================================================================
+   8. ARTS & CULTURE THEME (Bold Coral-Fuchsia / Modern Slate)
+   Best suited for art spaces, galleries, creative trusts, and youth theater.
+   ========================================================================== */
+
+/* Arts & Culture - Light Mode */
+[data-theme="arts-culture"] {
+  --color-surface: 320 20% 99%;          /* Sterile light canvas background */
+  --color-surface-elevated: 320 15% 95%; /* Clean canvas gray shade */
+  --color-ink: 230 40% 12%;              /* Modern deep navy ink */
+  --color-ink-muted: 230 20% 42%;        /* Clean slate gray text */
+  --color-accent: 325 80% 45%;           /* Vibrant coral fuchsia */
+  --color-accent-contrast: 0 0% 100%;    /* Stark white text */
+  --color-border: 320 15% 90%;           /* Subtle canvas border */
+}
+
+/* Arts & Culture - Dark Mode */
+.dark [data-theme="arts-culture"],
+[data-theme="arts-culture"].dark {
+  --color-surface: 320 10% 8%;           /* Obsidian canvas dark background */
+  --color-surface-elevated: 320 8% 14%;  /* Dark slate card block */
+  --color-ink: 320 20% 96%;              /* Light canvas text */
+  --color-ink-muted: 320 10% 70%;        /* Muted slate text */
+  --color-accent: 325 90% 60%;           /* Electric coral fuchsia */
+  --color-accent-contrast: 320 15% 10%;   /* Deep charcoal text */
+  --color-border: 320 8% 18%;            /* Dark slate border */
+}
+
 /* Smooth HSL variables transitions on theme changes */
 .theme-transitioning,
 .theme-transitioning * {

@@ -29,3 +29,19 @@ input, select, textarea, button {
   background-color: hsl(var(--color-accent) / 0.2);
   color: hsl(var(--color-ink));
 }
+
+/* Font Pairing Mapping Rules */
+html[data-font-pairing="editorial"], :root {
+  --font-serif: var(--font-serif-editorial);
+  --font-sans: var(--font-sans-editorial);
+}
+
+html[data-font-pairing="expressive"] {
+  --font-serif: var(--font-serif-expressive);
+  --font-sans: var(--font-sans-expressive);
+}
+
+html[data-font-pairing="scholarly"] {
+  --font-serif: var(--font-serif-scholarly);
+  --font-sans: var(--font-sans-scholarly);
+}

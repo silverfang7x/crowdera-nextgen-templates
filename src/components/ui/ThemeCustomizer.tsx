@@ -51,6 +51,27 @@ const PRESETS: PresetItem[] = [
     bgHex: '#fefdf9',
     accentHex: '#a8500e',
   },
+  {
+    id: 'education',
+    name: 'Education & Literacy',
+    desc: 'Scholarly indigo & clean lavender',
+    bgHex: '#fcfbfe',
+    accentHex: '#6d1bc5',
+  },
+  {
+    id: 'faith-based',
+    name: 'Faith & Reflection',
+    desc: 'Burgundy wine & warm champagne',
+    bgHex: '#fdfbfa',
+    accentHex: '#9c1a53',
+  },
+  {
+    id: 'arts-culture',
+    name: 'Arts & Expression',
+    desc: 'Bold fuchsia & obsidian canvas',
+    bgHex: '#fffefa',
+    accentHex: '#cc1776',
+  },
 ];
 
 export function ThemeCustomizer() {

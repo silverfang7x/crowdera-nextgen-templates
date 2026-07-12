@@ -20,6 +20,8 @@ export interface AboutSectionProps {
   imageUrl: string;
   videoUrl?: string;
   values?: ValueItem[];
+  layout?: 'text-only' | 'text-image' | 'text-video' | 'text-image-video';
+  id?: string;
 }
 
 const DEFAULT_VALUES: ValueItem[] = [
@@ -54,13 +56,16 @@ export function AboutSection({
   imageUrl,
   videoUrl,
   values = DEFAULT_VALUES,
+  layout,
+  id = "about",
 }: AboutSectionProps) {
   const shouldReduceMotion = useReducedMotion();
+  const resolvedLayout = layout || (videoUrl ? "text-video" : "text-image");
 
   return (
     <FlexibleSection
-      id="about"
-      layout={videoUrl ? "text-video" : "text-image"}
+      id={id}
+      layout={resolvedLayout}
       align="right"
       eyebrow="Who We Are"
       heading={headline}
