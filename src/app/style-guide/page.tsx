@@ -14,6 +14,8 @@ import { Label, Input, Textarea, Select, HelperText, ErrorText } from '@/compone
 import { Avatar } from '@/components/ui/Avatar';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 import { Section, Container } from '@/components/ui/Section';
+import { FlexibleSection } from '@/components/sections/FlexibleSection';
+import { GallerySection } from '@/components/sections/GallerySection';
 
 const PRESETS = [
   { id: 'humanitarian', name: 'Humanitarian', desc: 'Terracotta & Ink', color: '#d24c2d' },
@@ -21,6 +23,36 @@ const PRESETS = [
   { id: 'healthcare', name: 'Healthcare', desc: 'Trust Blue & Soft White', color: '#1463e1' },
   { id: 'animal-welfare', name: 'Animal Welfare', desc: 'Amber & Charcoal', color: '#e59419' },
   { id: 'disaster-relief', name: 'Disaster Relief', desc: 'Emergency Red & Graphite', color: '#d91d1d' },
+];
+
+const GALLERY_ITEMS = [
+  {
+    id: "g1",
+    type: "image" as const,
+    url: "https://images.unsplash.com/photo-1541913772248-f077579f18a3?auto=format&fit=crop&w=1200&q=80",
+    thumbnailUrl: "https://images.unsplash.com/photo-1541913772248-f077579f18a3?auto=format&fit=crop&w=600&q=80",
+    title: "Water Filtration",
+    description: "Field engineers assemble gravity-powered filtration membranes inside an emergency camp.",
+    aspectRatioClass: "aspect-[4/3]"
+  },
+  {
+    id: "g2",
+    type: "video" as const,
+    url: "https://assets.mixkit.co/videos/preview/mixkit-water-dripping-from-a-tap-in-slow-motion-41619-large.mp4",
+    thumbnailUrl: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=600&q=80",
+    title: "Clean Water Output",
+    description: "First output flow of drinking water from the newly deployed filtration hub.",
+    aspectRatioClass: "aspect-video"
+  },
+  {
+    id: "g3",
+    type: "image" as const,
+    url: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
+    thumbnailUrl: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80",
+    title: "Community Distribution",
+    description: "Displaced kids and families receiving clean water jars and food rations.",
+    aspectRatioClass: "aspect-square"
+  }
 ];
 
 export default function StyleGuidePage() {
@@ -33,6 +65,7 @@ export default function StyleGuidePage() {
   const [formEmail, setFormEmail] = useState('');
   const [formSelect, setFormSelect] = useState('one-time');
   const [formError, setFormError] = useState(false);
+  const [galleryView, setGalleryView] = useState<'masonry' | 'grid' | 'carousel'>('masonry');
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
@@ -554,6 +587,116 @@ export default function StyleGuidePage() {
             </div>
           </div>
         </Container>
+      </Section>
+
+      {/* 9. GALLERY VIEW TOGGLES */}
+      <Section padding="md">
+        <Container>
+          <div className="border-b border-border pb-3 mb-8 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 className="text-2xl font-serif text-ink">9. Dynamic Gallery View Modes</h2>
+              <p className="text-xs text-ink-muted">Toggle between masonry, grid, or carousel layouts for image and video visuals.</p>
+            </div>
+            
+            {/* View Mode controls */}
+            <div className="flex bg-surface-elevated border border-border p-1 rounded-lg">
+              {(['masonry', 'grid', 'carousel'] as const).map((mode) => {
+                const isActive = galleryView === mode;
+                return (
+                  <button
+                    key={mode}
+                    onClick={() => setGalleryView(mode)}
+                    className={`cursor-pointer px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md transition-all ${
+                      isActive ? 'bg-surface text-ink shadow-sm' : 'text-ink-muted hover:text-ink'
+                    }`}
+                  >
+                    {mode}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="border border-border/80 rounded-2xl overflow-hidden bg-surface-elevated/10">
+            <GallerySection
+              sectionHeadline="Sandboxed Gallery Preview"
+              sectionSubtitle="Verify dynamic arrangement swaps across different viewport breakpoints without breaking lightbox functionality."
+              items={GALLERY_ITEMS}
+              view={galleryView}
+            />
+          </div>
+        </Container>
+      </Section>
+
+      {/* 10. FLEXIBLESECTION LAYOUT VARIATIONS */}
+      <Section padding="md">
+        <Container>
+          <div className="border-b border-border pb-3 mb-8">
+            <h2 className="text-2xl font-serif text-ink">10. FlexibleSection Configurable Layouts</h2>
+            <p className="text-xs text-ink-muted font-sans">Demonstrating all four responsive layout modes built for configurable landing segments.</p>
+          </div>
+        </Container>
+
+        {/* Demo 1: Text Only */}
+        <div className="border-y border-border/40 py-8 bg-surface-elevated/10">
+          <div className="max-w-5xl mx-auto px-4 text-xs font-mono text-ink-muted mb-2 font-semibold">Layout: &quot;text-only&quot; | Align: &quot;right&quot;</div>
+          <FlexibleSection
+            layout="text-only"
+            align="right"
+            eyebrow="Narrative Focus"
+            heading="Purely Text-Driven Message Blocks"
+            content="This layout concentrates fully on text readability. It spans an offset column structure to generate a modern editorial aesthetic, which prevents long lines of description text from spanning the full width of the viewport."
+            ctaText="Explore Initiatives"
+            ctaHref="#"
+            padding="sm"
+          />
+        </div>
+
+        {/* Demo 2: Text Image */}
+        <div className="border-b border-border/40 py-8 bg-surface-elevated/20">
+          <div className="max-w-5xl mx-auto px-4 text-xs font-mono text-ink-muted mb-2 font-semibold">Layout: &quot;text-image&quot; | Align: &quot;left&quot;</div>
+          <FlexibleSection
+            layout="text-image"
+            align="left"
+            eyebrow="Media Integration"
+            heading="Asymmetric Storytelling With Imagery"
+            content="Perfect for introducing organization pillars, field logs, or site narratives. Swapping the align prop mirrors the columns automatically."
+            imageUrl="https://images.unsplash.com/photo-1541913772248-f077579f18a3?auto=format&fit=crop&w=600&q=80"
+            ctaText="Read Staging Metrics"
+            padding="sm"
+          />
+        </div>
+
+        {/* Demo 3: Text Video */}
+        <div className="border-b border-border/40 py-8 bg-surface-elevated/10">
+          <div className="max-w-5xl mx-auto px-4 text-xs font-mono text-ink-muted mb-2 font-semibold">Layout: &quot;text-video&quot; | Align: &quot;right&quot;</div>
+          <FlexibleSection
+            layout="text-video"
+            align="right"
+            eyebrow="Active Frontlines"
+            heading="Dynamic Response Capture Using Video"
+            content="Captures attention instantly. Plays muted looping clips of active triage bases or resource deliveries alongside contextual action descriptions."
+            videoUrl="https://assets.mixkit.co/videos/preview/mixkit-water-filtering-through-charcoal-41716-large.mp4"
+            ctaText="Watch Deployment Logs"
+            padding="sm"
+          />
+        </div>
+
+        {/* Demo 4: Text Image Video */}
+        <div className="border-b border-border/40 py-8 bg-surface-elevated/20">
+          <div className="max-w-5xl mx-auto px-4 text-xs font-mono text-ink-muted mb-2 font-semibold">Layout: &quot;text-image-video&quot; | Align: &quot;left&quot;</div>
+          <FlexibleSection
+            layout="text-image-video"
+            align="left"
+            eyebrow="Triple Column Layout"
+            heading="Configurable Content Staging Layout"
+            content="Combines description text, a static photo log, and a video clip in an editorial asymmetric grid. Highly custom grid composition."
+            imageUrl="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80"
+            videoUrl="https://assets.mixkit.co/videos/preview/mixkit-water-filtering-through-charcoal-41716-large.mp4"
+            ctaText="Submit Support Request"
+            padding="sm"
+          />
+        </div>
       </Section>
     </div>
   );

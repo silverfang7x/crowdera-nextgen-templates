@@ -59,12 +59,14 @@ export interface GallerySectionProps {
   sectionHeadline?: string;
   sectionSubtitle?: string;
   items: GalleryItem[];
+  view?: 'masonry' | 'grid' | 'carousel';
 }
 
 export function GallerySection({
   sectionHeadline = "Relief Operations Gallery",
   sectionSubtitle = "A visual archive of our direct response teams deploying water filtration and medical support around the globe.",
   items,
+  view = 'masonry',
 }: GallerySectionProps) {
   const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
@@ -155,13 +157,64 @@ export function GallerySection({
     };
   }, [activeIndex, closeLightbox, handlePrev, handleNext]);
 
+  const renderGalleryItem = (item: GalleryItem, index: number, isMasonry = false) => (
+    <div
+      key={item.id}
+      className={cn(
+        "group relative rounded-xl border border-border/80 overflow-hidden shadow-sm bg-surface-elevated/40 cursor-pointer text-left",
+        isMasonry ? "break-inside-avoid mb-6" : ""
+      )}
+    >
+      {/* Trigger Button wrapping the image */}
+      <button
+        onClick={() => openLightbox(index)}
+        className="w-full text-left relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl"
+        aria-label={`Open lightbox viewer for ${item.title}`}
+      >
+        <div className={cn("relative w-full overflow-hidden", isMasonry ? (item.aspectRatioClass || 'aspect-video') : 'aspect-video')}>
+          <GalleryImage
+            src={item.thumbnailUrl}
+            alt={item.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+
+          {/* Play Button Overlay for Videos */}
+          {item.type === 'video' && (
+            <div className="absolute inset-0 bg-black/25 flex items-center justify-center transition-colors group-hover:bg-black/40">
+              <div className="w-12 h-12 rounded-full bg-accent/90 flex items-center justify-center text-accent-contrast shadow-lg group-hover:scale-110 transition-transform">
+                <Play className="w-5 h-5 fill-current ml-0.5" />
+              </div>
+            </div>
+          )}
+
+          {/* Hover Overlay with details */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white">
+            <span className="text-3xs uppercase tracking-widest text-accent-contrast/75 font-semibold">
+              {item.type === 'video' ? 'Video Report' : 'Photo dispatch'}
+            </span>
+            <h4 className="font-serif font-bold text-base mt-1 text-white leading-tight">
+              {item.title}
+            </h4>
+            {item.description && (
+              <p className="text-2xs text-accent-contrast/90 line-clamp-2 mt-1 leading-normal font-sans">
+                {item.description}
+              </p>
+            )}
+          </div>
+        </div>
+      </button>
+    </div>
+  );
+
   return (
     <Section padding="lg" background="default" id="gallery">
       <Container asymmetric className="space-y-12">
         
         {/* Header Block */}
         <div className="max-w-2xl text-left space-y-3">
-          <span className="text-xs uppercase tracking-widest text-accent font-bold">
+          <span className="text-xs uppercase tracking-widest text-accent font-bold font-sans">
             Frontline Visuals
           </span>
           <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight text-ink">
@@ -172,56 +225,30 @@ export function GallerySection({
           </p>
         </div>
 
-        {/* CSS Masonry Layout Columns */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
-          {items.map((item, index) => (
-            <div
-              key={item.id}
-              className="break-inside-avoid mb-6 group relative rounded-xl border border-border/80 overflow-hidden shadow-sm bg-surface-elevated/40 cursor-pointer"
-            >
-              {/* Trigger Button wrapping the image */}
-              <button
-                onClick={() => openLightbox(index)}
-                className="w-full text-left relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl"
-                aria-label={`Open lightbox viewer for ${item.title}`}
-              >
-                <div className={`relative w-full ${item.aspectRatioClass || 'aspect-video'} overflow-hidden`}>
-                  <GalleryImage
-                    src={item.thumbnailUrl}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+        {/* View Mode Switching Layout Rendering */}
+        {view === 'masonry' && (
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:_balance]">
+            {items.map((item, index) => renderGalleryItem(item, index, true))}
+          </div>
+        )}
 
-                  {/* Play Button Overlay for Videos */}
-                  {item.type === 'video' && (
-                    <div className="absolute inset-0 bg-black/25 flex items-center justify-center transition-colors group-hover:bg-black/40">
-                      <div className="w-12 h-12 rounded-full bg-accent/90 flex items-center justify-center text-accent-contrast shadow-lg group-hover:scale-110 transition-transform">
-                        <Play className="w-5 h-5 fill-current ml-0.5" />
-                      </div>
-                    </div>
-                  )}
+        {view === 'grid' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {items.map((item, index) => renderGalleryItem(item, index, false))}
+          </div>
+        )}
 
-                  {/* Hover Overlay with details */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white">
-                    <span className="text-3xs uppercase tracking-widest text-accent-contrast/75 font-semibold">
-                      {item.type === 'video' ? 'Video Report' : 'Photo dispatch'}
-                    </span>
-                    <h4 className="font-serif font-bold text-base mt-1 text-white leading-tight">
-                      {item.title}
-                    </h4>
-                    {item.description && (
-                      <p className="text-2xs text-accent-contrast/90 line-clamp-2 mt-1 leading-normal font-sans">
-                        {item.description}
-                      </p>
-                    )}
-                  </div>
+        {view === 'carousel' && (
+          <div className="relative group/carousel">
+            <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin select-none snap-x snap-mandatory scroll-smooth">
+              {items.map((item, index) => (
+                <div key={item.id} className="w-[300px] sm:w-[400px] shrink-0 snap-start">
+                  {renderGalleryItem(item, index, false)}
                 </div>
-              </button>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
 
         {/* ACCESSIBLE LIGHTBOX DRAWER */}
         <AnimatePresence>

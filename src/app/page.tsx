@@ -14,6 +14,7 @@ import { GallerySection } from '@/components/sections/GallerySection';
 import { NewsSection } from '@/components/sections/NewsSection';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { FlexibleSection } from '@/components/sections/FlexibleSection';
 
 const PRESETS = [
   { id: 'humanitarian', name: 'Humanitarian', desc: 'Terracotta & Ink', color: '#d24c2d' },
@@ -307,6 +308,29 @@ export default function ClearwaterHomepage() {
             sectionHeadline="Latest Frontline Dispatches"
             sectionSubtitle="Direct reports, updates, and logistical field logs compiled by our rapid deployment units."
             articles={newsArticlesData}
+          />
+        </ScrollReveal>
+
+        {/* 7.5 GLOBAL LOGISTICS PREPAREDNESS (FlexibleSection Reusability Demo) */}
+        <ScrollReveal>
+          <FlexibleSection
+            id="logistics-demo"
+            layout="text-image-video"
+            align="left"
+            eyebrow="Global Preparedness"
+            heading="Staged, Tested, and Deployed"
+            content={
+              <p>
+                Our response operations rely on pre-staged supplies loaded at our three global logistics warehouses in Miami, Dubai, and Nairobi. By testing filtration systems and checking expiration limits on triage medication before transport, we ensure that cargo arrivals operate immediately upon field deployment.
+              </p>
+            }
+            imageUrl="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80"
+            imageAlt="Emergency staging warehouse cargo loaders"
+            videoUrl="https://assets.mixkit.co/videos/preview/mixkit-water-filtering-through-charcoal-41716-large.mp4"
+            ctaText="Read Staging Metrics"
+            ctaHref="#about"
+            background="elevated"
+            padding="lg"
           />
         </ScrollReveal>
 

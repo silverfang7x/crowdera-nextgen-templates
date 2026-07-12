@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ChevronDown, Heart, ArrowRight } from 'lucide-react';
+import { ChevronDown, Heart, ArrowRight, Play, Pause } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 
@@ -39,6 +39,29 @@ export function HeroBanner({
   const [currentIdx, setCurrentIdx] = React.useState(0);
   const [isMobile, setIsMobile] = React.useState(false);
   const [mediaError, setMediaError] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(true);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  // Default autoplay off if prefers-reduced-motion is active
+  React.useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      if (shouldReduceMotion) {
+        setIsPlaying(false);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [shouldReduceMotion]);
+
+  // Sync video play state on play/pause click
+  React.useEffect(() => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.play().catch(() => {});
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
 
   // Resize listener for mobile check
   React.useEffect(() => {
@@ -52,12 +75,12 @@ export function HeroBanner({
 
   // Carousel transition interval
   React.useEffect(() => {
-    if (variant !== 'carousel' || (isMobile && forceStaticImageOnMobile) || !images || images.length <= 1) return;
+    if (variant !== 'carousel' || (isMobile && forceStaticImageOnMobile) || !images || images.length <= 1 || !isPlaying) return;
     const interval = setInterval(() => {
       setCurrentIdx((prev) => (prev + 1) % images.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [variant, isMobile, forceStaticImageOnMobile, images]);
+  }, [variant, isMobile, forceStaticImageOnMobile, images, isPlaying]);
 
   // Determine background render strategy
   const renderBackground = () => {
@@ -76,7 +99,8 @@ export function HeroBanner({
     if (variant === 'video' && videoUrl) {
       return (
         <video
-          autoPlay
+          ref={videoRef}
+          autoPlay={isPlaying}
           muted
           loop
           playsInline
@@ -203,6 +227,17 @@ export function HeroBanner({
           <ChevronDown className="w-5 h-5 text-surface dark:text-ink" />
         </motion.div>
       </div>
+
+      {/* Subtle background media play/pause toggle */}
+      {(variant === 'video' || variant === 'carousel') && !(isMobile && forceStaticImageOnMobile) && !mediaError && (
+        <button
+          onClick={() => setIsPlaying((prev) => !prev)}
+          className="absolute bottom-8 right-8 z-30 w-11 h-11 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white border border-white/20 hover:scale-105 active:scale-100 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          aria-label={isPlaying ? "Pause background playback" : "Resume background playback"}
+        >
+          {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
+        </button>
+      )}
     </section>
   );
 }
