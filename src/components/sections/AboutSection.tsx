@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Droplet, Flame, Eye, Users } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section';
 
@@ -55,6 +55,7 @@ export function AboutSection({
   videoUrl,
   values = DEFAULT_VALUES,
 }: AboutSectionProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [videoError, setVideoError] = React.useState(false);
 
   return (
@@ -132,10 +133,10 @@ export function AboutSection({
             {values.map((val, idx) => (
               <motion.div
                 key={val.title}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+                whileInView={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: idx * 0.1 }}
                 className="p-5 bg-surface-elevated border border-border/60 hover:border-accent/30 rounded-lg shadow-sm transition-all duration-300 flex flex-col gap-3 group"
               >
                 <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-accent-contrast transition-colors duration-300">

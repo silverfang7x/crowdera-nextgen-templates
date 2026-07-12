@@ -387,15 +387,15 @@ export default function StyleGuidePage() {
               <h3 className="text-sm font-bold text-accent">Initials Fallbacks (invalid `src` or missing photo)</h3>
               <div className="flex items-center gap-4">
                 <div className="text-center">
-                  <Avatar size="sm" fallback="JD" />
+                  <Avatar size="sm" fallback="JD" alt="John Doe" />
                   <div className="text-2xs text-ink-muted mt-1">sm (JD)</div>
                 </div>
                 <div className="text-center">
-                  <Avatar size="md" fallback="MV" />
+                  <Avatar size="md" fallback="MV" alt="Marcus Vance" />
                   <div className="text-2xs text-ink-muted mt-1">md (MV)</div>
                 </div>
                 <div className="text-center">
-                  <Avatar size="lg" fallback="CR" />
+                  <Avatar size="lg" fallback="CR" alt="Clearwater Relief" />
                   <div className="text-2xs text-ink-muted mt-1">lg (CR)</div>
                 </div>
               </div>
@@ -484,7 +484,7 @@ export default function StyleGuidePage() {
                 footer={
                   <>
                     <div className="flex items-center gap-2">
-                      <Avatar size="sm" fallback="ML" />
+                      <Avatar size="sm" fallback="ML" alt="Marcus Diaz" />
                       <span className="text-xs text-ink font-semibold">Marcus Diaz</span>
                     </div>
                     <span className="text-xs text-ink-muted">4 min read</span>

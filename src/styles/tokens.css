@@ -40,7 +40,7 @@
   --color-surface-elevated: 30 30% 94%;  /* Slightly darker cream accent surface */
   --color-ink: 24 15% 15%;               /* Rich ink black-brown */
   --color-ink-muted: 24 10% 45%;         /* Muted earthy gray-brown */
-  --color-accent: 12 70% 50%;            /* Warm terracotta clay red */
+  --color-accent: 12 75% 44%;            /* Warm terracotta clay red (darkened for 4.5:1 WCAG AA contrast) */
   --color-accent-contrast: 0 0% 100%;    /* Pure white for text on CTA buttons */
   --color-border: 24 15% 90%;            /* Soft warm grey border */
 }
@@ -67,7 +67,7 @@
   --color-surface: 60 30% 98%;           /* Warm sandy off-white */
   --color-surface-elevated: 60 20% 94%;  /* Slightly darker warm sand */
   --color-ink: 142 35% 12%;              /* Deep pine green-black */
-  --color-ink-muted: 142 20% 40%;        /* Forest green-gray */
+  --color-ink-muted: 142 22% 35%;        /* Forest green-gray (darkened for 4.5:1 WCAG AA contrast) */
   --color-accent: 142 45% 30%;           /* Deep forest moss green */
   --color-accent-contrast: 0 0% 100%;    /* Pure white text */
   --color-border: 142 20% 88%;           /* Soft sage border */
@@ -124,8 +124,8 @@
   --color-surface-elevated: 40 20% 95%;  /* Slightly darker cream */
   --color-ink: 30 15% 15%;               /* Deep warm charcoal */
   --color-ink-muted: 30 10% 45%;         /* Medium warm gray text */
-  --color-accent: 38 92% 50%;            /* Vibrant golden amber */
-  --color-accent-contrast: 30 15% 10%;   /* Deep charcoal text on amber buttons */
+  --color-accent: 32 85% 35%;            /* Vibrant golden amber (adjusted for 4.5:1 WCAG AA contrast on light backgrounds) */
+  --color-accent-contrast: 0 0% 100%;    /* Pure white text on amber button */
   --color-border: 30 10% 90%;            /* Soft charcoal border */
 }
 

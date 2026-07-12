@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section';
 import Image from 'next/image';
@@ -27,6 +27,7 @@ export function GallerySection({
   sectionSubtitle = "A visual archive of our direct response teams deploying water filtration and medical support around the globe.",
   items,
 }: GallerySectionProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const lightboxRef = React.useRef<HTMLDivElement>(null);
   const lastActiveElementRef = React.useRef<HTMLElement | null>(null);
@@ -234,10 +235,10 @@ export function GallerySection({
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeIndex}
-                      initial={{ opacity: 0, scale: 0.95 }}
+                      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.25 }}
+                      exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
+                      transition={shouldReduceMotion ? { duration: 0.15 } : { duration: 0.25 }}
                       className="w-full h-full relative flex items-center justify-center"
                     >
                       {items[activeIndex].type === 'video' ? (

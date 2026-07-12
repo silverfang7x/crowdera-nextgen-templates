@@ -22,7 +22,7 @@ export interface AvatarProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof avatarVariants> {
   src?: string;
-  alt?: string;
+  alt: string;
   fallback?: string;
 }
 
@@ -44,7 +44,7 @@ export function Avatar({ className, size, src, alt, fallback, ...props }: Avatar
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src}
-          alt={alt || "User Profile"}
+          alt={alt}
           className="h-full w-full object-cover"
           onError={() => setHasError(true)}
         />

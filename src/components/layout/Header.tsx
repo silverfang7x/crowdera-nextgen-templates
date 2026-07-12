@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { useScroll, useMotionValueEvent, motion, AnimatePresence } from 'framer-motion';
+import { useScroll, useMotionValueEvent, motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X, Search, Heart, User } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
@@ -31,6 +31,7 @@ export function Header({
   logoSrc,
   navItems = DEFAULT_NAV_ITEMS,
 }: HeaderProps) {
+  const shouldReduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
   
   const [isSticky, setIsSticky] = React.useState(false);
@@ -196,9 +197,9 @@ export function Header({
               <AnimatePresence>
                 {isSearchExpanded && (
                   <motion.div
-                    initial={{ width: 0, opacity: 0 }}
+                    initial={shouldReduceMotion ? { opacity: 0 } : { width: 0, opacity: 0 }}
                     animate={{ width: 180, opacity: 1 }}
-                    exit={{ width: 0, opacity: 0 }}
+                    exit={shouldReduceMotion ? { opacity: 0 } : { width: 0, opacity: 0 }}
                     className="overflow-hidden mr-2"
                   >
                     <form onSubmit={handleSearchSubmit}>
@@ -206,6 +207,7 @@ export function Header({
                         ref={searchInputRef}
                         type="text"
                         placeholder="Search site..."
+                        aria-label="Search site"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="w-full bg-surface border border-border text-xs rounded-md px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-1 focus:ring-offset-surface text-ink placeholder:text-ink-muted/50 outline-none transition-all duration-200"
@@ -217,7 +219,7 @@ export function Header({
               <button
                 onClick={toggleSearch}
                 aria-label="Toggle search bar"
-                className="p-2 text-ink-muted hover:text-ink rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors cursor-pointer"
+                className="w-11 h-11 flex items-center justify-center text-ink-muted hover:text-ink rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors cursor-pointer"
               >
                 {isSearchExpanded ? <X className="w-4 h-4" /> : <Search className="w-4 h-4" />}
               </button>
@@ -251,7 +253,7 @@ export function Header({
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-expanded={isMobileMenuOpen}
               aria-label="Toggle mobile menu"
-              className="p-2 text-ink md:hidden rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors cursor-pointer"
+              className="w-11 h-11 flex items-center justify-center text-ink md:hidden rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors cursor-pointer"
             >
               <Menu className="w-6 h-6" />
             </button>
@@ -264,10 +266,10 @@ export function Header({
         {isMobileMenuOpen && (
           <motion.div
             ref={mobileMenuRef}
-            initial={{ opacity: 0, x: '100%' }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: '100%' }}
+            transition={shouldReduceMotion ? { duration: 0.15 } : { type: 'spring', damping: 25, stiffness: 220 }}
             className="fixed inset-0 z-50 w-full h-full bg-surface-elevated/98 backdrop-blur-md flex flex-col justify-between"
           >
             {/* Drawer Header Bar */}
@@ -311,7 +313,7 @@ export function Header({
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label="Close mobile menu"
-                  className="p-2 text-ink rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors cursor-pointer"
+                  className="w-11 h-11 flex items-center justify-center text-ink rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 focus-visible:ring-offset-surface transition-colors cursor-pointer"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -327,6 +329,7 @@ export function Header({
                   <input
                     type="text"
                     placeholder="Search initiatives, updates..."
+                    aria-label="Search initiatives and updates"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full bg-surface border border-border text-sm rounded-md pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface text-ink outline-none"

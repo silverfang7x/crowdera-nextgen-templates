@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section';
 import Image from 'next/image';
@@ -27,6 +27,7 @@ export function TestimonialsSection({
   sectionSubtitle = "Hear from the emergency responders, community leaders, and donors partnering with Clearwater Relief Trust.",
   testimonials,
 }: TestimonialsSectionProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = React.useState(0);
   const activeTestimonial = testimonials[activeIndex];
 
@@ -104,10 +105,10 @@ export function TestimonialsSection({
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, y: 15 }}
+                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.3 }}
+                exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -15 }}
+                transition={shouldReduceMotion ? { duration: 0.15 } : { duration: 0.3 }}
                 className="space-y-6 z-10"
               >
                 {/* Optional Star Rating */}

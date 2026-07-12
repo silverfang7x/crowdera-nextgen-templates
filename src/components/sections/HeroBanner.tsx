@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ChevronDown, Heart, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
@@ -35,6 +35,7 @@ export function HeroBanner({
   forceStaticImageOnMobile = true,
   className,
 }: HeroBannerProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [currentIdx, setCurrentIdx] = React.useState(0);
   const [isMobile, setIsMobile] = React.useState(false);
   const [mediaError, setMediaError] = React.useState(false);
@@ -97,10 +98,10 @@ export function HeroBanner({
               key={currentIdx}
               src={images[currentIdx]}
               alt={`Slide ${currentIdx + 1}`}
-              initial={{ opacity: 0, scale: 1.05 }}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95 }}
+              transition={shouldReduceMotion ? { duration: 0.4 } : { duration: 1.2, ease: "easeInOut" }}
               className="absolute inset-0 w-full h-full object-cover"
               onError={() => setMediaError(true)}
             />
@@ -141,18 +142,18 @@ export function HeroBanner({
       <div className="relative z-20 w-full max-w-5xl mx-auto px-4 md:px-8 flex flex-col justify-center h-full">
         <div className="w-full md:max-w-2xl text-left space-y-6">
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-display font-serif font-bold tracking-tight text-surface dark:text-ink leading-tight drop-shadow-sm"
           >
             {headline}
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4 }}
             className="text-base md:text-lg text-surface/85 dark:text-ink-muted leading-relaxed font-sans max-w-lg"
           >
             {missionStatement}
@@ -160,9 +161,9 @@ export function HeroBanner({
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.6 }}
             className="flex flex-wrap items-center gap-4 pt-4"
           >
             <a href={primaryCtaHref}>
@@ -196,8 +197,8 @@ export function HeroBanner({
           Scroll to explore
         </span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          animate={shouldReduceMotion ? {} : { y: [0, 8, 0] }}
+          transition={shouldReduceMotion ? {} : { repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
         >
           <ChevronDown className="w-5 h-5 text-surface dark:text-ink" />
         </motion.div>
