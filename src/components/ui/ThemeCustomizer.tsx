@@ -2,9 +2,10 @@
 
 import * as React from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Palette, X, Sun, Moon, Check } from 'lucide-react';
+import { Palette, X, Sun, Moon, Check, Sparkles } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
+import { useDemoMode } from '@/components/editor/AIContentSuggest';
 
 interface PresetItem {
   id: string;
@@ -61,6 +62,7 @@ export function ThemeCustomizer() {
   const shouldReduceMotion = useReducedMotion();
   const drawerRef = React.useRef<HTMLDivElement>(null);
   const lastActiveElementRef = React.useRef<HTMLElement | null>(null);
+  const { demoMode, toggleDemoMode } = useDemoMode();
 
   // Sync preset from localStorage on client mount
   React.useEffect(() => {
@@ -272,6 +274,41 @@ export function ThemeCustomizer() {
                   </div>
                 </div>
 
+                {/* 3. Demo Mode Toggle */}
+                <div className="space-y-4 pt-6 border-t border-border/60">
+                  <div>
+                    <h3 className="font-sans font-bold text-sm text-ink uppercase tracking-wider">Demo Mode Sandbox</h3>
+                    <p className="text-3xs text-ink-muted leading-normal mt-1">Enable builder helpers for testing template editing.</p>
+                  </div>
+
+                  <button
+                    onClick={toggleDemoMode}
+                    className={cn(
+                      "w-full flex items-center justify-between p-3.5 rounded-lg border cursor-pointer select-none transition-all duration-200 font-sans",
+                      demoMode
+                        ? "border-accent bg-surface shadow-sm ring-1 ring-accent/25"
+                        : "border-border/60 bg-surface/30 hover:border-border hover:bg-surface/75"
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Sparkles className={cn("w-4 h-4", demoMode ? "text-accent" : "text-ink-muted")} />
+                      <div className="text-left">
+                        <span className="block text-3xs font-bold text-ink">AI Content Assist</span>
+                        <span className="block text-4xs text-ink-muted mt-0.5 font-sans">Show sparkles next to copy blocks</span>
+                      </div>
+                    </div>
+                    {/* Toggle Switch Pill */}
+                    <div className={cn(
+                      "w-8 h-4 rounded-full p-0.5 transition-colors duration-200 shrink-0",
+                      demoMode ? "bg-accent" : "bg-border"
+                    )}>
+                      <div className={cn(
+                        "w-3 h-3 rounded-full bg-white transition-transform duration-200",
+                        demoMode ? "translate-x-4" : "translate-x-0"
+                      )} />
+                    </div>
+                  </button>
+                </div>
               </div>
 
               {/* Drawer Footer Information */}

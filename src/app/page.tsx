@@ -82,7 +82,7 @@ export default function ClearwaterHomepage() {
       description: "Deploying high-yield gravity water purification systems to disaster camps and schools within 24 hours of infrastructure collapse.",
       imageUrl: "https://images.unsplash.com/photo-1541913772248-f077579f18a3?auto=format&fit=crop&w=800&q=80",
       ctaText: "See Deployment Map",
-      ctaHref: "#donate"
+      ctaHref: "/donate"
     },
     {
       id: "medical",
@@ -90,7 +90,7 @@ export default function ClearwaterHomepage() {
       description: "Providing immediate primary care, wound treatment, and emergency pharmacy services in the critical first 72 hours.",
       imageUrl: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
       ctaText: "Deploy Medical Aid",
-      ctaHref: "#donate"
+      ctaHref: "/donate"
     },
     {
       id: "supply",
@@ -98,7 +98,7 @@ export default function ClearwaterHomepage() {
       description: "Distributing hygiene kits, thermal blankets, emergency lighting, and non-perishable food rations to stranded flood families.",
       imageUrl: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=800&q=80",
       ctaText: "Sponsor a Survival Pack",
-      ctaHref: "#donate"
+      ctaHref: "/donate"
     },
     {
       id: "education",
@@ -106,7 +106,7 @@ export default function ClearwaterHomepage() {
       description: "Training local community coordinators to manage and maintain gravity-powered filtration systems to yield water long-term.",
       imageUrl: "https://images.unsplash.com/photo-1535090486790-5b8f175d05f7?auto=format&fit=crop&w=800&q=80",
       ctaText: "Learn Safety Model",
-      ctaHref: "#about"
+      ctaHref: "/#about"
     }
   ];
 
@@ -214,7 +214,7 @@ export default function ClearwaterHomepage() {
       summary: "Clearwater Relief response teams set up three emergency water purification lines within 18 hours of storm landfall, supplying 30,000 liters of safe drinking water daily.",
       date: "2026-07-08T00:00:00.000Z",
       imageUrl: "https://images.unsplash.com/photo-1541913772248-f077579f18a3?auto=format&fit=crop&w=600&q=80",
-      href: "#news"
+      href: "/news/madagascar-water-deployment"
     },
     {
       id: "n2",
@@ -222,7 +222,7 @@ export default function ClearwaterHomepage() {
       summary: "Our medical triage unit deployed on the ground provides critical medicine, clean water, and primary care in the aftermath of local infrastructure collapse.",
       date: "2026-06-24T00:00:00.000Z",
       imageUrl: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80",
-      href: "#news"
+      href: "/news/mobile-medical-clinic"
     },
     {
       id: "n3",
@@ -230,7 +230,7 @@ export default function ClearwaterHomepage() {
       summary: "Collaborative agreement deploys lightweight, gravity-powered filtration units directly to schools serving as temporary refuges.",
       date: "2026-05-15T00:00:00.000Z",
       imageUrl: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=600&q=80",
-      href: "#news"
+      href: "/news/who-shelters-partnership"
     }
   ];
 
@@ -251,9 +251,9 @@ export default function ClearwaterHomepage() {
           headline="Rapid Response When Seconds Save Lives"
           missionStatement="Clearwater Relief Trust deploys mobile purification systems, medical support, and critical survival packs directly to families in disaster zones in the crucial first 72 hours."
           primaryCtaText="Donate to Relief"
-          primaryCtaHref="#donate"
+          primaryCtaHref="/donate"
           secondaryCtaText="Read Our Story"
-          secondaryCtaHref="#about"
+          secondaryCtaHref="/#about"
           forceStaticImageOnMobile={true}
         />
 
@@ -328,7 +328,7 @@ export default function ClearwaterHomepage() {
             imageAlt="Emergency staging warehouse cargo loaders"
             videoUrl="https://assets.mixkit.co/videos/preview/mixkit-water-filtering-through-charcoal-41716-large.mp4"
             ctaText="Read Staging Metrics"
-            ctaHref="#about"
+            ctaHref="/#about"
             background="elevated"
             padding="lg"
           />
@@ -340,9 +340,9 @@ export default function ClearwaterHomepage() {
             headline="Help Us Deploy Survival Resources When Seconds Save Lives"
             description="Clearwater Relief Trust is a registered 501(c)(3) NPO. Your tax-deductible contribution directly funds water filtration logistics and emergency medical cargo."
             primaryCtaText="Donate Now"
-            primaryCtaHref="#donate"
+            primaryCtaHref="/donate"
             secondaryCtaText="Volunteer With Us"
-            secondaryCtaHref="#volunteer"
+            secondaryCtaHref="/volunteer"
           />
         </ScrollReveal>
 

@@ -5,6 +5,8 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Section, Container } from '@/components/ui/Section';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
+import { AIContentSuggest } from '@/components/editor/AIContentSuggest';
 
 export interface TestimonialItem {
   id: string;
@@ -30,6 +32,22 @@ export function TestimonialsSection({
   const shouldReduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = React.useState(0);
   const activeTestimonial = testimonials[activeIndex];
+
+  const [quoteText, setQuoteText] = React.useState(activeTestimonial.quote);
+  const [hlQuote, setHlQuote] = React.useState(false);
+
+  React.useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setQuoteText(activeTestimonial.quote);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [activeTestimonial]);
+
+  const changeQuote = (newText: string) => {
+    setQuoteText(newText);
+    setHlQuote(true);
+    setTimeout(() => setHlQuote(false), 1000);
+  };
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
@@ -122,8 +140,18 @@ export function TestimonialsSection({
                 )}
 
                 {/* Big Quote text */}
-                <p className="text-lg md:text-xl font-serif italic text-ink leading-relaxed font-semibold">
-                  &ldquo;{activeTestimonial.quote}&rdquo;
+                <p className={cn(
+                  "text-lg md:text-xl font-serif italic text-ink leading-relaxed font-semibold transition-all duration-500 relative group/editor inline-flex items-center w-full text-left",
+                  hlQuote ? "bg-accent/25 ring-4 ring-accent/30 rounded-md scale-[1.01] px-2 text-accent-contrast dark:text-accent" : ""
+                )}>
+                  <span>&ldquo;{quoteText}&rdquo;</span>
+                  {activeIndex === 0 && (
+                    <AIContentSuggest
+                      sectionKey="testimonial-1-quote"
+                      onSelect={changeQuote}
+                      className="opacity-0 group-hover/editor:opacity-100 transition-opacity duration-200"
+                    />
+                  )}
                 </p>
 
                 {/* Author Info row */}

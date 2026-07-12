@@ -129,27 +129,27 @@ export function Footer({
             <h3 className="text-sm font-bold uppercase tracking-wider text-accent font-sans">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="#about" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
+                <Link href="/#about" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
                   About Our Mission
                 </Link>
               </li>
               <li>
-                <Link href="#programs" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
+                <Link href="/programs" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
                   Active Programs
                 </Link>
               </li>
               <li>
-                <Link href="#volunteer" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
+                <Link href="/volunteer" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
                   Get Involved / Volunteer
                 </Link>
               </li>
               <li>
-                <Link href="#donate" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
+                <Link href="/donate" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
                   Make a Donation
                 </Link>
               </li>
               <li>
-                <Link href="#news" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
+                <Link href="/news" className="inline-block text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface-elevated rounded-sm px-1 -mx-1">
                   Latest Blog & Updates
                 </Link>
               </li>

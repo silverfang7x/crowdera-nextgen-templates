@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ChevronDown, Heart, ArrowRight, Play, Pause } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { AIContentSuggest } from '@/components/editor/AIContentSuggest';
 
 export interface HeroBannerProps {
   variant: 'image' | 'video' | 'carousel';
@@ -28,10 +29,10 @@ export function HeroBanner({
   fallbackImage,
   headline,
   missionStatement,
-  primaryCtaText = "Donate Now",
-  primaryCtaHref = "#donate",
-  secondaryCtaText = "Learn Our Story",
-  secondaryCtaHref = "#about",
+  primaryCtaText = "Donate to Relief",
+  primaryCtaHref = "/donate",
+  secondaryCtaText = "Read Our Story",
+  secondaryCtaHref = "/#about",
   forceStaticImageOnMobile = true,
   className,
 }: HeroBannerProps) {
@@ -41,6 +42,37 @@ export function HeroBanner({
   const [mediaError, setMediaError] = React.useState(false);
   const [isPlaying, setIsPlaying] = React.useState(true);
   const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  const [headlineText, setHeadlineText] = React.useState(headline);
+  const [missionText, setMissionText] = React.useState(missionStatement);
+  const [hlHeadline, setHlHeadline] = React.useState(false);
+  const [hlMission, setHlMission] = React.useState(false);
+
+  React.useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setHeadlineText(headline);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [headline]);
+
+  React.useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setMissionText(missionStatement);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [missionStatement]);
+
+  const changeHeadline = (newText: string) => {
+    setHeadlineText(newText);
+    setHlHeadline(true);
+    setTimeout(() => setHlHeadline(false), 1000);
+  };
+
+  const changeMission = (newText: string) => {
+    setMissionText(newText);
+    setHlMission(true);
+    setTimeout(() => setHlMission(false), 1000);
+  };
 
   // Default autoplay off if prefers-reduced-motion is active
   React.useEffect(() => {
@@ -169,18 +201,34 @@ export function HeroBanner({
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-display font-serif font-bold tracking-tight text-surface dark:text-ink leading-tight drop-shadow-sm"
+            className={cn(
+              "text-4xl md:text-5xl lg:text-display font-serif font-bold tracking-tight text-surface dark:text-ink leading-tight drop-shadow-sm transition-all duration-500 relative group/editor inline-flex items-center",
+              hlHeadline ? "bg-accent/25 ring-4 ring-accent/30 rounded-md scale-[1.01] px-2 text-accent-contrast dark:text-accent" : ""
+            )}
           >
-            {headline}
+            <span>{headlineText}</span>
+            <AIContentSuggest
+              sectionKey="hero-headline"
+              onSelect={changeHeadline}
+              className="opacity-0 group-hover/editor:opacity-100 transition-opacity duration-200"
+            />
           </motion.h1>
 
           <motion.p
             initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, delay: 0.4 }}
-            className="text-base md:text-lg text-surface/85 dark:text-ink-muted leading-relaxed font-sans max-w-lg"
+            className={cn(
+              "text-base md:text-lg text-surface/85 dark:text-ink-muted leading-relaxed font-sans max-w-lg transition-all duration-500 relative group/editor inline-flex items-center",
+              hlMission ? "bg-accent/25 ring-4 ring-accent/30 rounded-md scale-[1.01] px-2 text-accent-contrast dark:text-accent" : ""
+            )}
           >
-            {missionStatement}
+            <span>{missionText}</span>
+            <AIContentSuggest
+              sectionKey="hero-mission"
+              onSelect={changeMission}
+              className="opacity-0 group-hover/editor:opacity-100 transition-opacity duration-200"
+            />
           </motion.p>
 
           {/* CTA Buttons */}

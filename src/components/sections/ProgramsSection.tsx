@@ -136,6 +136,7 @@ export function ProgramsSection({
                 key={prog.id}
                 variant="program-card"
                 className="h-full"
+                sectionKey={prog.id === 'water' ? 'program-water-desc' : undefined}
                 image={
                   <div className="relative w-full h-full overflow-hidden">
                     <Image
@@ -179,7 +180,8 @@ export function ProgramsSection({
                 <div key={prog.id} className="w-[320px] sm:w-[350px] shrink-0 pointer-events-none select-none">
                   <Card
                     variant="program-card"
-                    className="h-full select-none"
+                    className="h-full select-none pointer-events-auto text-left"
+                    sectionKey={prog.id === 'water' ? 'program-water-desc' : undefined}
                     image={
                       <div className="relative w-full h-full overflow-hidden">
                         <Image

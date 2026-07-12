@@ -19,11 +19,11 @@ export interface HeaderProps {
 }
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
-  { label: 'About', href: '#about' },
-  { label: 'Programs', href: '#programs' },
-  { label: 'Get Involved', href: '#volunteer' },
-  { label: 'News', href: '#news' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '/#about' },
+  { label: 'Programs', href: '/programs' },
+  { label: 'Get Involved', href: '/volunteer' },
+  { label: 'News', href: '/news' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export function Header({
@@ -226,7 +226,7 @@ export function Header({
             </div>
 
             {/* Volunteer CTA (lower priority) */}
-            <Link href="#volunteer" className="hidden sm:inline-block">
+            <Link href="/volunteer" className="hidden sm:inline-block">
               <Button 
                 variant="secondary" 
                 size="sm"
@@ -237,7 +237,7 @@ export function Header({
             </Link>
 
             {/* Donate CTA (visually distinct, always visible) */}
-            <Link href="#donate" className="relative z-50">
+            <Link href="/donate" className="relative z-50">
               <Button 
                 variant="donate" 
                 size="sm"
@@ -299,7 +299,7 @@ export function Header({
               {/* Action Area in Drawer Header */}
               <div className="flex items-center gap-3">
                 {/* Donate CTA (always visible) */}
-                <Link href="#donate" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link href="/donate" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button 
                     variant="donate" 
                     size="sm"
@@ -377,7 +377,7 @@ export function Header({
                   className="mt-6"
                 >
                   <Link
-                    href="#volunteer"
+                    href="/volunteer"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="block w-full"
                   >

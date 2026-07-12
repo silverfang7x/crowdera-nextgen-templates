@@ -19,9 +19,9 @@ export function CtaSection({
   headline = "Help Us Restore Hope and Clean Water to Families in Crisis",
   description = "Every second counts in a disaster zone. Your tax-deductible support allows our rapid response teams to set up gravity-powered filtration lines and medical hubs immediately when disaster strikes.",
   primaryCtaText = "Donate Now",
-  primaryCtaHref = "#donate",
+  primaryCtaHref = "/donate",
   secondaryCtaText = "Join Us as a Volunteer",
-  secondaryCtaHref = "#volunteer",
+  secondaryCtaHref = "/volunteer",
 }: CtaSectionProps) {
   return (
     <Section padding="xl" background="accent" className="relative overflow-hidden z-10 shadow-inner" id="cta-action">

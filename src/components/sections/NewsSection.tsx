@@ -89,7 +89,7 @@ export function NewsSection({
               title={art.title}
               body={art.summary}
               footer={
-                <Link href={art.href || "#news"} className="w-full flex items-center justify-between group/link">
+                <Link href={art.href || "/news"} className="w-full flex items-center justify-between group/link">
                   <span className="text-xs font-bold text-ink group-hover/link:text-accent transition-colors font-sans uppercase tracking-wider">
                     Read Full Dispatch
                   </span>
