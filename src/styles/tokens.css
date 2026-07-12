@@ -1,0 +1,170 @@
+/**
+ * Crowdera NextGen NPO Template System
+ * Design Token System (CSS Custom Properties)
+ * 
+ * This file contains the semantic tokens used across the site.
+ * Colors are defined as space-separated HSL values (H S% L%) to allow 
+ * Tailwind's opacity modifier syntax (e.g., bg-accent/20) to function natively.
+ */
+
+:root {
+  /* Default Theme (Humanitarian Light) fallback values */
+  --color-surface: 30 40% 98%;           /* Primary background of pages, cards, and large components */
+  --color-surface-elevated: 30 30% 94%;  /* Elevated surface backgrounds (e.g., hover states, modals, cards) */
+  --color-ink: 24 15% 15%;               /* Primary body copy, headers, and dense typography */
+  --color-ink-muted: 24 10% 45%;         /* Secondary/subtle text, captions, and placeholder content */
+  --color-accent: 12 70% 50%;            /* Focus color for CTA buttons, highlights, links, and brand accents */
+  --color-accent-contrast: 0 0% 100%;    /* High-contrast ink color to render on top of the accent color */
+  --color-border: 24 15% 90%;            /* Dividers, borders, and structural container edges */
+
+  /* Structural & Dimensional Tokens */
+  --radius-sm: 4px;                      /* Subtle rounding for small inputs, badges, and tag elements */
+  --radius-md: 8px;                      /* Standard rounding for buttons, cards, and form containers */
+  --radius-lg: 16px;                     /* Generous rounding for sections, profile boxes, and image frames */
+  --radius-full: 9999px;                 /* Perfect circular rounding for avatars and pill elements */
+
+  /* Box Shadows mapped dynamically using HSL ink overlay */
+  --shadow-sm: 0 1px 2px 0 hsl(var(--color-ink) / 0.05);
+  --shadow-md: 0 4px 6px -1px hsl(var(--color-ink) / 0.08), 0 2px 4px -2px hsl(var(--color-ink) / 0.08);
+  --shadow-lg: 0 10px 15px -3px hsl(var(--color-ink) / 0.1), 0 4px 6px -4px hsl(var(--color-ink) / 0.1);
+}
+
+/* ==========================================================================
+   1. HUMANITARIAN THEME (Warm terracotta / deep warm ink)
+   Best suited for community development, global outreach, and grassroots NPOs.
+   ========================================================================== */
+
+/* Humanitarian - Light Mode (Default) */
+[data-theme="humanitarian"] {
+  --color-surface: 30 40% 98%;           /* Warm cream background */
+  --color-surface-elevated: 30 30% 94%;  /* Slightly darker cream accent surface */
+  --color-ink: 24 15% 15%;               /* Rich ink black-brown */
+  --color-ink-muted: 24 10% 45%;         /* Muted earthy gray-brown */
+  --color-accent: 12 70% 50%;            /* Warm terracotta clay red */
+  --color-accent-contrast: 0 0% 100%;    /* Pure white for text on CTA buttons */
+  --color-border: 24 15% 90%;            /* Soft warm grey border */
+}
+
+/* Humanitarian - Dark Mode */
+.dark [data-theme="humanitarian"],
+[data-theme="humanitarian"].dark {
+  --color-surface: 24 15% 12%;           /* Deep warm dark gray-brown */
+  --color-surface-elevated: 24 12% 18%;  /* Slightly lighter warm dark gray-brown */
+  --color-ink: 30 30% 95%;               /* Bright off-white cream text */
+  --color-ink-muted: 30 15% 70%;         /* Mid-tone warm cream text */
+  --color-accent: 12 75% 60%;            /* Brightened terracotta for dark contrast */
+  --color-accent-contrast: 24 15% 10%;    /* Dark ink text on terracotta buttons */
+  --color-border: 24 12% 22%;            /* Dark charcoal border */
+}
+
+/* ==========================================================================
+   2. ENVIRONMENT THEME (Forest moss / warm sand cream)
+   Best suited for climate action, conservation, urban forestry, and wildlife projects.
+   ========================================================================== */
+
+/* Environment - Light Mode */
+[data-theme="environment"] {
+  --color-surface: 60 30% 98%;           /* Warm sandy off-white */
+  --color-surface-elevated: 60 20% 94%;  /* Slightly darker warm sand */
+  --color-ink: 142 35% 12%;              /* Deep pine green-black */
+  --color-ink-muted: 142 20% 40%;        /* Forest green-gray */
+  --color-accent: 142 45% 30%;           /* Deep forest moss green */
+  --color-accent-contrast: 0 0% 100%;    /* Pure white text */
+  --color-border: 142 20% 88%;           /* Soft sage border */
+}
+
+/* Environment - Dark Mode */
+.dark [data-theme="environment"],
+[data-theme="environment"].dark {
+  --color-surface: 142 20% 10%;          /* Darkest forest night green */
+  --color-surface-elevated: 142 15% 15%; /* Dark moss green surface */
+  --color-ink: 60 30% 95%;               /* Warm sandy text */
+  --color-ink-muted: 142 15% 70%;        /* Muted sage text */
+  --color-accent: 142 40% 45%;           /* Vibrant moss green */
+  --color-accent-contrast: 142 25% 10%;   /* Deep forest black text */
+  --color-border: 142 15% 20%;           /* Dark pine border */
+}
+
+/* ==========================================================================
+   3. HEALTHCARE THEME (Clinical trust blue / soft hospital white)
+   Best suited for clinics, medical relief, research foundations, and mental health.
+   ========================================================================== */
+
+/* Healthcare - Light Mode */
+[data-theme="healthcare"] {
+  --color-surface: 210 40% 99%;          /* Pure sterile off-white */
+  --color-surface-elevated: 210 30% 96%; /* Soft ice-blue-gray */
+  --color-ink: 222 47% 12%;              /* Deep corporate trust navy */
+  --color-ink-muted: 215 20% 45%;        /* Slate gray text */
+  --color-accent: 221 83% 45%;           /* Clinical trust blue */
+  --color-accent-contrast: 0 0% 100%;    /* Pure white text */
+  --color-border: 214 32% 91%;           /* Soft medical slate border */
+}
+
+/* Healthcare - Dark Mode */
+.dark [data-theme="healthcare"],
+[data-theme="healthcare"].dark {
+  --color-surface: 222 47% 11%;          /* Midnight blue-black */
+  --color-surface-elevated: 222 40% 16%; /* Deep navy blue block */
+  --color-ink: 210 40% 98%;              /* Bright ice-blue-white text */
+  --color-ink-muted: 215 20% 75%;        /* Soft slate text */
+  --color-accent: 217 91% 60%;           /* High-visibility active blue */
+  --color-accent-contrast: 222 47% 11%;   /* Midnight blue-black text */
+  --color-border: 222 30% 22%;           /* Navy border */
+}
+
+/* ==========================================================================
+   4. ANIMAL-WELFARE THEME (Golden amber / dark charcoal)
+   Best suited for shelters, adoption agencies, animal sanctuaries, and rescue.
+   ========================================================================== */
+
+/* Animal Welfare - Light Mode */
+[data-theme="animal-welfare"] {
+  --color-surface: 40 30% 99%;           /* Warm amber-tinted cream */
+  --color-surface-elevated: 40 20% 95%;  /* Slightly darker cream */
+  --color-ink: 30 15% 15%;               /* Deep warm charcoal */
+  --color-ink-muted: 30 10% 45%;         /* Medium warm gray text */
+  --color-accent: 38 92% 50%;            /* Vibrant golden amber */
+  --color-accent-contrast: 30 15% 10%;   /* Deep charcoal text on amber buttons */
+  --color-border: 30 10% 90%;            /* Soft charcoal border */
+}
+
+/* Animal Welfare - Dark Mode */
+.dark [data-theme="animal-welfare"],
+[data-theme="animal-welfare"].dark {
+  --color-surface: 30 10% 10%;           /* Deep warm charcoal black */
+  --color-surface-elevated: 30 8% 16%;   /* Lighter charcoal gray block */
+  --color-ink: 40 30% 96%;               /* Soft warm sand text */
+  --color-ink-muted: 30 10% 70%;         /* Muted gray text */
+  --color-accent: 38 95% 55%;            /* Glowing amber */
+  --color-accent-contrast: 30 15% 10%;   /* Charcoal text on buttons */
+  --color-border: 30 8% 22%;             /* Dark charcoal border */
+}
+
+/* ==========================================================================
+   5. DISASTER-RELIEF THEME (High-visibility red / deep graphite)
+   Best suited for emergency response, red cross agencies, and mutual aid groups.
+   ========================================================================== */
+
+/* Disaster Relief - Light Mode */
+[data-theme="disaster-relief"] {
+  --color-surface: 0 0% 100%;            /* Pure stark white background */
+  --color-surface-elevated: 220 10% 96%; /* Clean light graphite gray */
+  --color-ink: 220 20% 12%;              /* Deep graphite black */
+  --color-ink-muted: 220 10% 45%;        /* Graphite gray text */
+  --color-accent: 0 84% 52% ;            /* High-visibility emergency red */
+  --color-accent-contrast: 0 0% 100%;    /* Stark white text */
+  --color-border: 220 10% 88%;           /* Clear graphite border */
+}
+
+/* Disaster Relief - Dark Mode */
+.dark [data-theme="disaster-relief"],
+[data-theme="disaster-relief"].dark {
+  --color-surface: 220 15% 10%;          /* Dark graphite gray black */
+  --color-surface-elevated: 220 12% 16%; /* Lighter graphite box surface */
+  --color-ink: 210 20% 98%;              /* High contrast light gray text */
+  --color-ink-muted: 220 10% 75%;        /* Muted gray text */
+  --color-accent: 0 90% 60%;             /* Bright emergency red */
+  --color-accent-contrast: 220 20% 10%;   /* Dark graphite text */
+  --color-border: 220 12% 22%;           /* Stark dark border */
+}
