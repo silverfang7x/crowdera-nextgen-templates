@@ -5,6 +5,8 @@ import { Section, Container } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 
+import { AIContentSuggest } from '@/components/editor/AIContentSuggest';
+
 export interface FlexibleSectionProps {
   layout: 'text-only' | 'text-image' | 'text-video' | 'text-image-video';
   align?: 'left' | 'right';
@@ -44,6 +46,22 @@ export function FlexibleSection({
 }: FlexibleSectionProps) {
   const isAlignRight = align === 'right';
 
+  const [headingText, setHeadingText] = React.useState(heading);
+  const [hlHeading, setHlHeading] = React.useState(false);
+
+  React.useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setHeadingText(heading);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [heading]);
+
+  const changeHeading = (newText: string) => {
+    setHeadingText(newText);
+    setHlHeading(true);
+    setTimeout(() => setHlHeading(false), 1000);
+  };
+
   // Render text block
   const renderTextContent = () => (
     <div className="space-y-6 flex flex-col justify-center">
@@ -52,8 +70,18 @@ export function FlexibleSection({
           {eyebrow}
         </span>
       )}
-      <h2 className="text-3xl md:text-4xl font-serif font-bold tracking-tight text-ink leading-tight">
-        {heading}
+      <h2 className={cn(
+        "text-3xl md:text-4xl font-serif font-bold tracking-tight text-ink leading-tight transition-all duration-500 relative group/editor inline-flex items-center w-full text-left",
+        hlHeading ? "bg-accent/25 ring-4 ring-accent/30 rounded-md scale-[1.01] px-2 text-accent-contrast dark:text-accent" : ""
+      )}>
+        <span>{headingText}</span>
+        {id === 'about' && (
+          <AIContentSuggest
+            sectionKey="about-headline"
+            onSelect={changeHeading}
+            className="opacity-0 group-hover/editor:opacity-100 transition-opacity duration-200"
+          />
+        )}
       </h2>
       
       {content && (
